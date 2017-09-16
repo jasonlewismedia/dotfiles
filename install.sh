@@ -400,18 +400,18 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false
 # SSD-specific tweaks                                                         #
 ###############################################################################
 
-running "Disable local Time Machine snapshots"
-sudo tmutil disablelocal;ok
+#running "Disable local Time Machine snapshots"
+#sudo tmutil disablelocal;ok
 
 # running "Disable hibernation (speeds up entering sleep mode)"
 # sudo pmset -a hibernatemode 0;ok
 
-running "Remove the sleep image file to save disk space"
-sudo rm -rf /Private/var/vm/sleepimage;ok
-running "Create a zero-byte file instead"
-sudo touch /Private/var/vm/sleepimage;ok
-running "…and make sure it can’t be rewritten"
-sudo chflags uchg /Private/var/vm/sleepimage;ok
+#running "Remove the sleep image file to save disk space"
+#sudo rm -rf /Private/var/vm/sleepimage;ok
+#running "Create a zero-byte file instead"
+#sudo touch /Private/var/vm/sleepimage;ok
+#running "…and make sure it can’t be rewritten"
+#sudo chflags uchg /Private/var/vm/sleepimage;ok
 
 #running "Disable the sudden motion sensor as it’s not useful for SSDs"
 # sudo pmset -a sms 0;ok
@@ -489,15 +489,15 @@ running "Disable the sound effects on boot"
 sudo nvram SystemAudioVolume=" ";ok
 
 running "Menu bar: disable transparency"
-defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false;ok
+#defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false;ok
 
-running "Menu bar: hide the Time Machine, Volume, User, and Bluetooth icons"
-for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
-  defaults write "${domain}" dontAutoLoad -array \
-    "/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
-    "/System/Library/CoreServices/Menu Extras/Volume.menu" \
-    "/System/Library/CoreServices/Menu Extras/User.menu"
-done;
+#running "Menu bar: hide the Time Machine, Volume, User, and Bluetooth icons"
+#for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
+#  defaults write "${domain}" dontAutoLoad -array \
+#    "/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
+#    "/System/Library/CoreServices/Menu Extras/Volume.menu" \
+#    "/System/Library/CoreServices/Menu Extras/User.menu"
+#done;
 defaults write com.apple.systemuiserver menuExtras -array \
   "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
   "/System/Library/CoreServices/Menu Extras/AirPort.menu" \
@@ -505,7 +505,7 @@ defaults write com.apple.systemuiserver menuExtras -array \
   "/System/Library/CoreServices/Menu Extras/Clock.menu"
 ok
 
-running "Set highlight color to green"
+#running "Set highlight color to green"
 defaults write NSGlobalDomain AppleHighlightColor -string "0.764700 0.976500 0.568600";ok
 
 running "Set sidebar icon size to medium"
@@ -557,8 +557,8 @@ sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo Hos
 running "Restart automatically if the computer freezes"
 sudo systemsetup -setrestartfreeze on;ok
 
-running "Never go into computer sleep mode"
-sudo systemsetup -setcomputersleep Off > /dev/null;ok
+#running "Never go into computer sleep mode"
+#sudo systemsetup -setcomputersleep Off > /dev/null;ok
 
 running "Check for software updates daily, not just once per week"
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1;ok
@@ -577,19 +577,19 @@ defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false;ok
 bot "Trackpad, mouse, keyboard, Bluetooth accessories, and input"
 ###############################################################################
 
-running "Trackpad: enable tap to click for this user and for the login screen"
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
-defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
-defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1;ok
+#running "Trackpad: enable tap to click for this user and for the login screen"
+#defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+#defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+#defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1;ok
 
-running "Trackpad: map bottom right corner to right-click"
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
-defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
-defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true;ok
+#running "Trackpad: map bottom right corner to right-click"
+#defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
+#defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
+#defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
+#defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true;ok
 
-running "Disable 'natural' (Lion-style) scrolling"
-defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false;ok
+#running "Disable 'natural' (Lion-style) scrolling"
+#defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false;ok
 
 running "Increase sound quality for Bluetooth headphones/headsets"
 defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40;ok
@@ -753,9 +753,9 @@ defaults write com.apple.dock launchanim -bool false;ok
 running "Speed up Mission Control animations"
 defaults write com.apple.dock expose-animation-duration -float 0.1;ok
 
-running "Don’t group windows by application in Mission Control"
+#running "Don’t group windows by application in Mission Control"
 # (i.e. use the old Exposé behavior instead)
-defaults write com.apple.dock expose-group-by-app -bool false;ok
+#defaults write com.apple.dock expose-group-by-app -bool false;ok
 
 running "Disable Dashboard"
 defaults write com.apple.dashboard mcx-disabled -bool true;ok
@@ -816,8 +816,8 @@ defaults write com.apple.Safari HomePage -string "about:blank";ok
 running "Prevent Safari from opening ‘safe’ files automatically after downloading"
 defaults write com.apple.Safari AutoOpenSafeDownloads -bool false;ok
 
-running "Allow hitting the Backspace key to go to the previous page in history"
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2BackspaceKeyNavigationEnabled -bool true;ok
+#running "Allow hitting the Backspace key to go to the previous page in history"
+#defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2BackspaceKeyNavigationEnabled -bool true;ok
 
 running "Hide Safari’s bookmarks bar by default"
 defaults write com.apple.Safari ShowFavoritesBar -bool false;ok
@@ -854,8 +854,8 @@ running "Disable send and reply animations in Mail.app"
 defaults write com.apple.mail DisableReplyAnimations -bool true
 defaults write com.apple.mail DisableSendAnimations -bool true;ok
 
-running "Copy email addresses as 'foo@example.com' instead of 'Foo Bar <foo@example.com>' in Mail.app"
-defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false;ok
+#running "Copy email addresses as 'foo@example.com' instead of 'Foo Bar <foo@example.com>' in Mail.app"
+#defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false;ok
 
 running "Add the keyboard shortcut ⌘ + Enter to send an email in Mail.app"
 defaults write com.apple.mail NSUserKeyEquivalents -dict-add "Send" -string "@\\U21a9";ok
@@ -865,8 +865,8 @@ defaults write com.apple.mail DraftsViewerAttributes -dict-add "DisplayInThreade
 defaults write com.apple.mail DraftsViewerAttributes -dict-add "SortedDescending" -string "yes"
 defaults write com.apple.mail DraftsViewerAttributes -dict-add "SortOrder" -string "received-date";ok
 
-running "Disable inline attachments (just show the icons)"
-defaults write com.apple.mail DisableInlineAttachmentViewing -bool true;ok
+#running "Disable inline attachments (just show the icons)"
+#defaults write com.apple.mail DisableInlineAttachmentViewing -bool true;ok
 
 running "Disable automatic spell checking"
 defaults write com.apple.mail SpellCheckingBehavior -string "NoSpellCheckingEnabled";ok
@@ -888,17 +888,17 @@ defaults write com.apple.spotlight orderedItems -array \
   '{"enabled" = 1;"name" = "DIRECTORIES";}' \
   '{"enabled" = 1;"name" = "PDF";}' \
   '{"enabled" = 1;"name" = "FONTS";}' \
-  '{"enabled" = 0;"name" = "DOCUMENTS";}' \
+  '{"enabled" = 1;"name" = "DOCUMENTS";}' \
   '{"enabled" = 0;"name" = "MESSAGES";}' \
   '{"enabled" = 0;"name" = "CONTACT";}' \
   '{"enabled" = 0;"name" = "EVENT_TODO";}' \
-  '{"enabled" = 0;"name" = "IMAGES";}' \
-  '{"enabled" = 0;"name" = "BOOKMARKS";}' \
+  '{"enabled" = 1;"name" = "IMAGES";}' \
+  '{"enabled" = 1;"name" = "BOOKMARKS";}' \
   '{"enabled" = 0;"name" = "MUSIC";}' \
   '{"enabled" = 0;"name" = "MOVIES";}' \
-  '{"enabled" = 0;"name" = "PRESENTATIONS";}' \
-  '{"enabled" = 0;"name" = "SPREADSHEETS";}' \
-  '{"enabled" = 0;"name" = "SOURCE";}';ok
+  '{"enabled" = 1;"name" = "PRESENTATIONS";}' \
+  '{"enabled" = 1;"name" = "SPREADSHEETS";}' \
+  '{"enabled" = 1;"name" = "SOURCE";}';ok
 running "Load new settings before rebuilding the index"
 killall mds > /dev/null 2>&1;ok
 running "Make sure indexing is enabled for the main volume"
@@ -1017,26 +1017,26 @@ defaults write com.apple.appstore ShowDebugMenu -bool true;ok
 bot "Messages"
 ###############################################################################
 
-running "Disable automatic emoji substitution (i.e. use plain text smileys)"
-defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticEmojiSubstitutionEnablediMessage" -bool false;ok
+#running "Disable automatic emoji substitution (i.e. use plain text smileys)"
+#defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticEmojiSubstitutionEnablediMessage" -bool false;ok
 
 running "Disable smart quotes as it’s annoying for messages that contain code"
 defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticQuoteSubstitutionEnabled" -bool false;ok
 
-running "Disable continuous spell checking"
-defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "continuousSpellCheckingEnabled" -bool false;ok
+#running "Disable continuous spell checking"
+#defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "continuousSpellCheckingEnabled" -bool false;ok
 
 ###############################################################################
-bot "SizeUp.app"
+#bot "SizeUp.app"
 ###############################################################################
 
-running "Start SizeUp at login"
-defaults write com.irradiatedsoftware.SizeUp StartAtLogin -bool true;ok
+#running "Start SizeUp at login"
+#defaults write com.irradiatedsoftware.SizeUp StartAtLogin -bool true;ok
 
-running "Don’t show the preferences window on next start"
-defaults write com.irradiatedsoftware.SizeUp ShowPrefsOnNextStart -bool false;ok
+#running "Don’t show the preferences window on next start"
+#defaults write com.irradiatedsoftware.SizeUp ShowPrefsOnNextStart -bool false;ok
 
-killall cfprefsd
+#killall cfprefsd
 
 ###############################################################################
 # Kill affected applications                                                  #
